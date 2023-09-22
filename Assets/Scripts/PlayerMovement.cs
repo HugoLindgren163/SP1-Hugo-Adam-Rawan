@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float rayDistance = 0.25f;
     private Animator anim;
-   
+
+    //Public variables
+    public AudioSource footstepsSound;
+
 
     //Changeable variables in Unity
     [SerializeField] private float moveSpeed = 1f;
@@ -50,6 +53,16 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
+        if (Input.GetKey(KeyCode.A) && CheckIfGrounded() == true || Input.GetKey(KeyCode.D) && CheckIfGrounded() == true)
+        {
+
+            footstepsSound.enabled = true;
+        }
+        else
+        {
+            footstepsSound.enabled = false;
+        }
+
         anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.velocity.x));
         anim.SetFloat("VerticalSpeed", rgbd.velocity.y);
         anim.SetBool("IsGrounded", CheckIfGrounded());  
@@ -78,8 +91,10 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D rightHit = Physics2D.Raycast(rightFoot.position, Vector2.down, rayDistance, whatIsGround);
 
         //Visual test if grounded 
-        Debug.DrawRay(leftFoot.position, Vector2.down * rayDistance, Color.blue, 0.25f);
+        /*Debug.DrawRay(leftFoot.position, Vector2.down * rayDistance, Color.blue, 0.25f);
         Debug.DrawRay(rightFoot.position, Vector2.down * rayDistance, Color.red, 0.25f);
+        */
+
 
         if (leftHit.collider != null && leftHit.collider.CompareTag("Ground") || rightHit.collider != null && rightHit.collider.CompareTag("Ground"))
         {
