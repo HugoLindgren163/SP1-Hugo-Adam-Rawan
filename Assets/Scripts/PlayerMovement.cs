@@ -12,23 +12,26 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
     private float rayDistance = 0.25f;
     private Animator anim;
+    private AudioSource audioSource;
 
     //Public variables
     public AudioSource footstepsSound;
-
+    
 
     //Changeable variables in Unity
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpForce = 300f;
     [SerializeField] private Transform leftFoot, rightFoot;
     [SerializeField] private LayerMask whatIsGround;
+    [SerializeField] private AudioClip jumpSound;
 
     // Start is called before the first frame update
     void Start()
     {
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();    
+        audioSource = GetComponent<AudioSource>();  
     }
 
     // Update is called once per frame
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && CheckIfGrounded() == true)
         {
-            Jump();
+            Jump();            
         }
 
         if (Input.GetKey(KeyCode.A) && CheckIfGrounded() == true || Input.GetKey(KeyCode.D) && CheckIfGrounded() == true)
@@ -83,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rgbd.AddForce(new Vector2(0, jumpForce));
+        audioSource.PlayOneShot(jumpSound, 0.8f);
     }
 
     private bool CheckIfGrounded()
