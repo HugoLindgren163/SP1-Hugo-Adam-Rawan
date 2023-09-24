@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 2.0f;
     private SpriteRenderer rend;
+    [SerializeField] private int damageGiven = 1;
 
 
     // Start is called before the first frame update
@@ -35,6 +36,16 @@ public class EnemyMovement : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyBlock"))
         {
             moveSpeed = -moveSpeed;
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            moveSpeed = -moveSpeed;
+        }
+
+        if(other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<PlayerMovement>().TakeDamage(damageGiven);
         }
 
     }

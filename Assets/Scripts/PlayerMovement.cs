@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     private float rayDistance = 0.25f;
     private Animator anim;
     private AudioSource audioSource;
+    private int startingHealth = 3;
+    private int currentHealth = 0;
 
     //Public variables
     public AudioSource footstepsSound;
@@ -22,12 +24,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float jumpForce = 300f;
     [SerializeField] private Transform leftFoot, rightFoot;
+    [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private AudioClip jumpSound;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = startingHealth;
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();    
@@ -87,6 +91,23 @@ public class PlayerMovement : MonoBehaviour
     {
         rgbd.AddForce(new Vector2(0, jumpForce));
         audioSource.PlayOneShot(jumpSound, 0.8f);
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        currentHealth -= damageAmount;
+        
+        if(currentHealth <= 0)
+        {
+            Respawn();
+        }
+    }
+
+    private void Respawn()
+    {
+        currentHealth = startingHealth;
+        transform.position = spawnPosition.position;
+        rgbd.velocity = Vector2.zero;
     }
 
     private bool CheckIfGrounded()

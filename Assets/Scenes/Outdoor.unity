@@ -4786,6 +4786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  damageGiven: 1
 --- !u!95 &1276387741
 Animator:
   serializedVersion: 5
@@ -5026,6 +5027,7 @@ MonoBehaviour:
   jumpForce: 450
   leftFoot: {fileID: 1803255017}
   rightFoot: {fileID: 711823805}
+  spawnPosition: {fileID: 276754538}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
