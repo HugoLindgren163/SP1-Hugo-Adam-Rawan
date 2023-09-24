@@ -9,6 +9,9 @@ public class EnemyMovement : MonoBehaviour
     private SpriteRenderer rend;
     [SerializeField] private int damageGiven = 1;
 
+    private int ghoulHealth = 3;
+    private bool canMove = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -49,4 +52,24 @@ public class EnemyMovement : MonoBehaviour
         }
 
     }
+
+
+    public void TakeDamage()
+    {
+        canMove = false;
+        ghoulHealth--;
+        Invoke("CanMoveAgain", 1f);
+
+            if (ghoulHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        private void CanMoveAgain()
+        {
+            canMove = true;
+        }
+
+
 }

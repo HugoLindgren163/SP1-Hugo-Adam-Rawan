@@ -18509,6 +18509,8 @@ Transform:
   m_Children:
   - {fileID: 1803255017}
   - {fileID: 711823805}
+  - {fileID: 2050174858}
+  - {fileID: 1763184119}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1378898463
@@ -18550,6 +18552,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcb9b8677a6b7e4981b7bd9482d04eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPointR: {fileID: 2050174858}
+  attackPointL: {fileID: 1763184119}
+  attackRange: 0.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  isAttacking: 0
+  canMove: 0
   coinsCollected: 0
   footstepsSound: {fileID: 1680340288}
   moveSpeed: 250
@@ -18561,6 +18571,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpSound: {fileID: 8300000, guid: 5c679f135c5fa1643afa3753db2785af, type: 3}
+  hitSound: {fileID: 0}
   healthSlider: {fileID: 2009581557}
   coinText: {fileID: 1857378388}
 --- !u!95 &1378898465
@@ -29535,6 +29546,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9097271089508417312, guid: c54dd253d942ec9438a5f711a3c866c5, type: 3}
   m_PrefabInstance: {fileID: 981493849}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1763184118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1763184119}
+  m_Layer: 9
+  m_Name: AttackPointL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1763184119
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763184118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1378898461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1803255016
 GameObject:
   m_ObjectHideFlags: 0
@@ -39953,6 +39995,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &2050174857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2050174858}
+  m_Layer: 9
+  m_Name: AttackPointR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2050174858
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050174857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1378898461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2119971809
 PrefabInstance:
   m_ObjectHideFlags: 0

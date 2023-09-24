@@ -10,13 +10,13 @@ public class StopAttacking : StateMachineBehaviour
 
     //Ge en referens till PlayerMovement, där attack funktionerna också borde vara.
 
-    //private PlayerMovement playerMovement;
+  private PlayerMovement playerMovement;
 
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateinfo, int layerIndex)
-    //{
-    //    playerMovement = animator.GetComponent<PlayerMovement>();
-    //    playerMovement.isAttacking = false;
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateinfo, int layerIndex)
+    {
+        playerMovement = animator.GetComponent<PlayerMovement>();
+       playerMovement.isAttacking = false;
+    }
 
 
 
