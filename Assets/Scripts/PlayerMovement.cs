@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     private int startingHealth = 3;
     private int currentHealth = 0;
+    private int spellscrollCollected = 0;
+    private int coinsCollected = 0;
 
     //Public variables
     public AudioSource footstepsSound;
@@ -27,10 +31,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform spawnPosition;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private TMP_Text coinText;
 
     // Start is called before the first frame update
     void Start()
     {
+        coinText.text = "" + coinsCollected;
         currentHealth = startingHealth;
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
@@ -72,14 +79,30 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetFloat("MoveSpeed", Mathf.Abs(rgbd.velocity.x));
         anim.SetFloat("VerticalSpeed", rgbd.velocity.y);
-        anim.SetBool("IsGrounded", CheckIfGrounded());  
-
+        anim.SetBool("IsGrounded", CheckIfGrounded());
+        
     }
 
     //Fixed Update
     private void FixedUpdate()
     {
         rgbd.velocity = new Vector2(horizontalValue * moveSpeed * Time.deltaTime, rgbd.velocity.y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("Coin"))
+        {
+            Destroy(other.gameObject);
+            coinsCollected++;
+            coinText.text = "" + coinsCollected;
+        }
+
+        if(other.CompareTag("Health"))
+        {
+            RestoreHealth(other.gameObject);
+        }
+
     }
 
     private void FlipSprite(bool direction)
@@ -96,8 +119,9 @@ public class PlayerMovement : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        
-        if(currentHealth <= 0)
+        UpdateHealthBar();
+
+        if (currentHealth <= 0)
         {
             Respawn();
         }
@@ -106,8 +130,30 @@ public class PlayerMovement : MonoBehaviour
     private void Respawn()
     {
         currentHealth = startingHealth;
+        UpdateHealthBar();
         transform.position = spawnPosition.position;
         rgbd.velocity = Vector2.zero;
+    }
+
+    private void UpdateHealthBar()
+    {
+        healthSlider.value = currentHealth;
+    }
+
+    private void RestoreHealth(GameObject healthPickup)
+    {
+        if(currentHealth >= startingHealth)
+        {
+            return;
+        }
+
+        else
+        {
+            currentHealth += 1;
+            UpdateHealthBar();
+            Destroy(healthPickup);
+        }
+
     }
 
     private bool CheckIfGrounded()

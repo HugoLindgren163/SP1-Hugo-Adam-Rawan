@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - EnemyBlock
   - Enemy
+  - Coin
+  - SpellScroll
+  - Health
   layers:
   - Default
   - TransparentFX
