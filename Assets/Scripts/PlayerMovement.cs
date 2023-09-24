@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight = true;
     private float attackRate = 3f;
     private float nextAttackTime = 0f;
-    private Animator _animator;
 
 
     //Variables
@@ -254,13 +253,13 @@ public class PlayerMovement : MonoBehaviour
         if (CheckIfGrounded())
         {
             //Get animationstate info
-            AnimatorStateInfo currentState = _animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo currentState = anim.GetCurrentAnimatorStateInfo(0);
             audioSource.pitch = Random.Range(0.8f, 1.2f);
             audioSource.PlayOneShot(hitSound, 0.5f);
             if (currentState.IsName("PlayerIdle") || currentState.IsName("PlayerRun"))
             {
                 //Play animation
-                _animator.SetTrigger("AttackOne");
+                anim.SetTrigger("AttackOne");
                 isAttacking = true;
                 //Check what direction we're facing
 
@@ -296,7 +295,7 @@ public class PlayerMovement : MonoBehaviour
             if (currentState.IsName("Cleric_Attack1") || currentState.IsName("Cleric_Attack_Transition1"))
             {
                 //Play animation
-                _animator.SetTrigger("AttackTwo");
+                anim.SetTrigger("AttackTwo");
                 isAttacking = true;
                 //Check what direction we're facing
 
@@ -328,7 +327,7 @@ public class PlayerMovement : MonoBehaviour
             if (currentState.IsName("Cleric_Attack2") || currentState.IsName("Cleric_Attack_Transition2"))
             {
                 //Play animation
-                _animator.SetTrigger("AttackThree");
+                anim.SetTrigger("AttackThree");
                 isAttacking = true;
                 //Check what direction we're facing
 

@@ -18557,7 +18557,7 @@ MonoBehaviour:
   attackRange: 0.5
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   isAttacking: 0
   canMove: 0
   coinsCollected: 0
