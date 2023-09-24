@@ -17412,7 +17412,7 @@ MonoBehaviour:
   finishedText: {fileID: 617985437}
   unfinishedText: {fileID: 1022268908}
   questGoal: 10
-  levelToLoad: 1
+  levelToLoad: 2
 --- !u!61 &966782430
 BoxCollider2D:
   m_ObjectHideFlags: 0
