@@ -17,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     private int startingHealth = 3;
     private int currentHealth = 0;
-    private int spellscrollCollected = 0;
+    
+    //private int spellscrollCollected = 0;
+
     public int coinsCollected = 0;
 
     //Public variables

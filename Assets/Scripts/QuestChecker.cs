@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestChecker : MonoBehaviour
 {
 
     [SerializeField] private GameObject dialogueBox, finishedText, unfinishedText;
     [SerializeField] private int questGoal = 10;
+    [SerializeField] private int levelToLoad;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,7 +18,7 @@ public class QuestChecker : MonoBehaviour
             {
                 dialogueBox.SetActive(true);
                 finishedText.SetActive(true);
-                // TODO: Change Level
+                Invoke("LoadNextLevel", 4.0f);
 
             }
             else
@@ -28,6 +30,10 @@ public class QuestChecker : MonoBehaviour
         }
     }
 
+    private void LoadNextLevel()
+    {
+        SceneManager.LoadScene(levelToLoad);
+    }
 
     private void OnTriggerExit2D(Collider2D other)
     {
