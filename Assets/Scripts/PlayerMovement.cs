@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private int startingHealth = 3;
     private int currentHealth = 0;
 
-    //private int spellscrollCollected = 0;
+    public int spellScrollsCollected = 0;
 
     public int coinsCollected = 0;
 
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
 
     [SerializeField] private AudioClip hitSound;
+    [SerializeField] private TMP_Text spellscrollText;
 
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TMP_Text coinText;
@@ -59,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         coinText.text = "" + coinsCollected;
+        
         currentHealth = startingHealth;
         rgbd = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
@@ -168,6 +170,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.CompareTag("Health"))
         {
             RestoreHealth(other.gameObject);
+        }
+
+        if (other.CompareTag("SpellScroll"))
+        {
+            Destroy(other.gameObject);
+            spellScrollsCollected = 1;
+            spellscrollText.text = "Found";
         }
 
     }
